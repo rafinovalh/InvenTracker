@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Movement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+
+    <!--DATA TABLE-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script defer src="movements.js"></script>
+
+    <!--CSSNYA-->
+    <link rel="stylesheet" href="menumovement.css">
+
+    <!--LINK FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand">
+        <div class="container-fluid">
+            <a class="navbar-logo" href="menuitem.html">
+                <img class="image-fluid" src="assets/logo-no-background.png" alt="..." width="92" height="92">
+                <img class="image-fluid" src="assets/logofont-no-background.png" alt="..." width="214" height="35">
+            </a>
+            <div class="user-navbar dropstart">
+                <ul class="navbar-nav bg">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="uil uil-user-circle">Username</i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container d-flex">
+        <div class="sidebar" id="side_nav">
+            <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
+                <button class="stream-btn btn d-md-none d-block close-btn px-1 py-0"><i class="uil uil-list-ul" style="font-size: 20px; color: #175676;" ><span>Menu</span></i></button>
+            </div>
+
+            <ul class="list-unstyled px-3 py-5" style="font-size: 18px;">
+                <li class="">
+                    <a href="menuitem.html" class="text-decoration-none py-3 px-3 d-block">
+                        <i class="uil uil-clipboard-alt"></i>
+                        Items
+                    </a>
+                </li>
+                <li class="">
+                    <a href="menulocation.html" class="text-decoration-none py-3 px-3 d-block">
+                        <i class="uil uil-map-marker"></i>
+                        Location
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="menumovement.html" class="text-decoration-none py-3 px-3 d-block">
+                        <i class="uil uil-truck-loading"></i>
+                        Movement
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <!--ALL CLICK IN PAGE-->
+            <div class="all-clicks">
+                <!--Modal Move-->
+                <button type="button" class="add-btn btn" data-bs-toggle="modal" data-bs-target="#AddModalForm">
+                    <i class="uil uil-truck-loading"></i>
+                    Move
+                </button>
+                <div class="modal fade" id="AddModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <div class="myform">
+                                    <h1 class="text-center">Move Items</h1>
+                                    <form>
+                                        <div class="mb-3 mt-4">
+                                            <label for="itemid" class="form-label">ItemID</label>
+                                            <input type="number" class="form-control" id="itemid" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="userid" class="form-label">UserID</label>
+                                            <input type="number" class="form-control" id="userid">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="locationid" class="form-label">LocationID</label>
+                                            <input type="number" class="form-control" id="locationID">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="date" class="form-label">Date</label>
+                                            <input type="date" class="form-control" id="Date">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="note" class="form-label">Note</label>
+                                            <input type="text" class="form-control" id="note">
+                                        </div>
+                                        <button type="submit" class="btn btn-light mt-3">Move</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
+            </div>
+
+            <div class="show-table" style="margin-top: 134px; width: 93%; margin-left: 53px;">
+                <div class="table-responsive">
+                    <table class="table" id="data-table" style="background-color: white;">
+                        <thead style="background-color:  #CCE6F4; width: 958px;">
+                            <tr>
+                                <th>ItemID</th>
+                                <th>UserID</th>
+                                <th>LocationID</th>
+                                <th>Date</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2</td>
+                                <td>30</td>
+                                <td>2011-04-25</td>
+                                <td>Jaga Baik baik</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <script>
+        $(".sidebar ul li").on('click', function(){
+            $(".sidebar ul li.active").removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('.open-btn').on('click', function(){
+            $('.sidebar').addClass('active');
+        });
+
+        $('.close-btn').on('click', function(){
+            $('.sidebar').removeClass('active');
+        })
+    </script>
+</body>
+</html>
