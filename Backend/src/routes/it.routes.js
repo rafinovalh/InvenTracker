@@ -3,7 +3,10 @@ const express = require('express');
 const router = express.Router();
 const itController = require('../controllers/it.controllers');
 
-router.post('/login',passport.authenticate('local'), itController.login);
+//router.post('/login',passport.authenticate('local'), itController.login);
+
+router.post('/login', itController.login);
+
 
 router.post('/register', itController.register);
 
@@ -13,7 +16,7 @@ router.delete('/deleteuser', itController.deleteUser);
 
 router.post('/additem', itController.addItem);
 
-router.get('/showItem', itController.showItem);
+router.get('/showitem', itController.showItem);
 
 router.get('/searchitembyname', itController.searchItemByName);
 

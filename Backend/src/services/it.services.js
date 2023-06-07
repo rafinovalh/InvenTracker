@@ -15,7 +15,8 @@ async function login (it){
         }
     }else{
         const user = result.rows[0];
-        if(user.password === password){
+        const comparePass = await helper.comparePassword(password, user.password);
+        if(comparePass){
             return {
                 message: 'Login successful',
                 user

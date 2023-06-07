@@ -2,8 +2,8 @@ const itService = require('../services/it.services');
 
 async function login(req,res){
     try{
-        //const result = await itService.login(req.body);
-        res.json({message: 'success'});
+        const result = await itService.login(req.body);
+        res.json({result});
     }catch(err){
         res.json(err);
     }
