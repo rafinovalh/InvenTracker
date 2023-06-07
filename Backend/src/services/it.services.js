@@ -6,8 +6,8 @@ const { describe } = require('node:test');
 const { group } = require('console');
 
 async function login (it){
-    const {name, password} = it;
-    const query = `SELECT * FROM users WHERE name = '${name}'`;
+    const {email, password} = it;
+    const query = `SELECT * FROM users WHERE name = '${email}'`;
     const result = await db.query(query);
     if(result.rows.length === 0){
         return {
@@ -28,6 +28,7 @@ async function login (it){
         }
     }
 }
+
 
 async function register (it){
     const {name, password, email, role} = it;
