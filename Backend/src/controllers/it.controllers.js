@@ -4,9 +4,10 @@ async function login(req, res) {
     try {
       const result = await itService.login(req.body);
       if (result.message === 'Login successful') {
-        res.status(200).json({ message: result.message });
+        req.session.user = result.user;
+        res.status(200).json(result);
       } else {
-        res.status(401).json({ message: result.message });
+        res.status(401).json(result);
       }
     } catch (err) {
       res.status(500).json({ message: 'Internal server error' });
@@ -50,12 +51,18 @@ async function addItem(req,res){
 }
 
 async function showItem(req,res){
-    try{
-        const result = await itService.showItem();
-        res.json(result);
-    }catch(err){
-        res.json(err);
+    if(req.session.user){
+        try{
+            const result = await itService.showItem();
+            res.json({user: req.session.user, message: result.message, showItems: result.showItems} );
+        }catch(err){
+            res.json(err);
+        }
+    }else{
+        res.status(401).json({ message: 'User not logged in' });
+
     }
+    
 }
 
 async function searchItemByName(req,res){
@@ -95,11 +102,13 @@ async function addLocation(req,res){
 }
 
 async function showLocation(req,res){
-    try{
-        const result = await itService.showLocation();
-        res.json(result);
-    }catch(err){
-        res.json(err);
+    if(req.session.user){
+        try{
+            const result = await itService.showLocation();
+            res.json({user: req.session.user, message: result.message, showLocation: result.showLocation} );
+        }catch(err){
+            res.json(err);
+        }
     }
 }
 
@@ -122,11 +131,13 @@ async function moveItem(req,res){
 }
 
 async function showMovement(req,res){
-    try{
-        const result = await itService.showMovement();
-        res.json(result);
-    }catch(err){
-        res.json(err);
+    if(req.session.user){
+        try{
+            const result = await itService.showMovement();
+            res.json({user: req.session.user, message: result.message, showMovement: result.showMovement} );
+        }catch(err){
+            res.json(err);
+        }
     }
 }
 

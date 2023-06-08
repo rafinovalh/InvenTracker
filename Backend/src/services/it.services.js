@@ -29,9 +29,8 @@ async function login (it){
     }
 }
 
-
 async function register (it){
-    const {name, password, email, role} = it;
+    const {name, email, role, password} = it;
     const pass = await helper.hashPassword(password);
     const query = `INSERT INTO users (name, password, email, role) VALUES ('${name}', '${pass}', '${email}', '${role}')`;
     const result = await db.query(query);
@@ -40,9 +39,8 @@ async function register (it){
             message: 'User Created'
         }
     }else{
-        return{
-            message: 'Error'
-        } 
+        throw new Error('Error creating user');
+
     }
 }
 
@@ -90,7 +88,7 @@ async function deleteUser (user){
 }
 
 async function addItem (it){
-    const {Name, Quantity, Category, LocationID, DateAdded} = it;
+    const {Name, Quantity, Category, LocationID} = it;
     const query = `INSERT INTO items (Name, Quantity, Category, LocationID) VALUES ('${Name}', '${Quantity}', '${Category}', '${LocationID}')`;
     const result = await db.query(query);
     if(result.rowCount === 1){
@@ -105,12 +103,12 @@ async function addItem (it){
 }
 
 async function showItem (){
-    const query = `SELECT * FROM items`;
+    const query = `SELECT * FROM items NATURAL JOIN location`;
     const result = await db.query(query);
     if(result.rowCount){
         return {
             message: 'Items found',
-            showItem : result.rows
+            showItems : result.rows
         }
     }else{
         return {
@@ -152,7 +150,7 @@ async function updateItem(it){
 
 async function deleteItem(it){
     const {ItemID} = it;
-    const query = `DELETE FROM items WHERE ItemID=${ItemID}`;
+    const query = `DELETE FROM items WHERE itemid=${ItemID}`;
     const result = await db.query(query);
     if(result.rowCount > 0){
         return {
@@ -168,7 +166,7 @@ async function deleteItem(it){
 
 async function addLocation (it){
     const {Name, Description, Address} = it;
-    const query = `INSERT INTO Location (Name, Description, Address) VALUES ('${Name}', '${Description}', '${Address}')`;
+    const query = `INSERT INTO Location (location_name, Description, Address) VALUES ('${Name}', '${Description}', '${Address}')`;
     const result = await db.query(query);
     if(result.rowCount === 1){
         return {
@@ -198,7 +196,7 @@ async function showLocation (){
     
 async function updateLocation(it){
     const {LocationID, Name, Description, Address} = it;
-    const query = `UPDATE location SET name='${Name}', description='${Description}', address='${Address}' WHERE locationID=${LocationID}`;
+    const query = `UPDATE location SET location_name='${Name}', description='${Description}', address='${Address}' WHERE locationID=${LocationID}`;
     const result = await db.query(query);
     if(result.rowCount > 0){
         return {

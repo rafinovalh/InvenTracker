@@ -12,11 +12,10 @@
     <!--DATA TABLE-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-
-    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
     <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script defer src="locations.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!--CSSNYA-->
     <link rel="stylesheet" href="menulocation.css">
@@ -37,7 +36,7 @@
                 <ul class="navbar-nav bg">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="uil uil-user-circle">Username</i>
+                            <i id="username" class="uil uil-user-circle">Username</i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="login.html">Logout</a></li>
@@ -98,13 +97,13 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="description" class="form-label">Description</label>
-                                            <input type="text" class="form-control" id="desription">
+                                            <input type="text" class="form-control" id="description">
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label">Address</label>
                                             <input type="text" class="form-control" id="address">
                                         </div>
-                                        <button type="submit" class="btn btn-light mt-3">Add</button>
+                                        <button type="button" id="addLocationButton" class="btn btn-light mt-3">Add</button>
                                     </form>
                                 </div>
                             </div>
@@ -147,18 +146,7 @@
                                             <label for="itemID" class="form-label">LocationID</label>
                                             <input type="number" class="form-control" id="itemID" aria-describedby="emailHelp">
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="deletename" class="form-label">Name</label>
-                                            <output type="text" class="form-control" id="deletename" aria-describedby="emailHelp">
-                                        </div>
-                                        <div class="mb-3 mt-4">
-                                            <label for="deletedescription" class="form-label">Description</label>
-                                            <output type="number" class="form-control" id="deletedescription" aria-describedby="emailHelp">
-                                        </div>
-                                        <div class="mb-3 mt-4">
-                                            <label for="deleteaddress" class="form-label">Address</label>
-                                            <output type="text" class="form-control" id="deleteaddress" aria-describedby="emailHelp">
-                                        </div>
+                                        
                                         <button type="submit" class="btn btn-light mt-3">Delete</button>
                                     </form>
                                 </div>
@@ -175,8 +163,8 @@
                                     <h1 class="text-center">Edit Location</h1>
                                     <form>
                                         <div class="mb-3 mt-4">
-                                            <label for="itemID" class="form-label">LocationID</label>
-                                            <input type="number" class="form-control" id="itemID" aria-describedby="emailHelp">
+                                            <label for="updateiItemID" class="form-label">LocationID</label>
+                                            <input type="number" class="form-control" id="updateItemID" aria-describedby="emailHelp">
                                         </div>
                                         <div class="mb-3">
                                             <label for="editname" class="form-label">Name</label>
@@ -184,13 +172,13 @@
                                         </div>
                                         <div class="mb-3 mt-4">
                                             <label for="editdesctiption" class="form-label">Description</label>
-                                            <input type="number" class="form-control" id="editdescription" aria-describedby="emailHelp">
+                                            <input type="text" class="form-control" id="editdescription" aria-describedby="emailHelp">
                                         </div>
                                         <div class="mb-3 mt-4">
                                             <label for="deleteaddress" class="form-label">Address</label>
                                             <input type="text" class="form-control" id="editaddress" aria-describedby="emailHelp">
                                         </div>
-                                        <button type="submit" class="btn btn-light mt-3">Submit</button>
+                                        <button type="button" id="updateLocation" class="btn btn-light mt-3">Submit</button>
                                     </form>
                                 </div>
                             </div>
@@ -206,6 +194,7 @@
                     <table class="table" id="data-table" style="background-color: white;">
                         <thead style="background-color:  #CCE6F4; width: 958px;">
                             <tr>
+                                <th>LocationID</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Address</th>
@@ -213,106 +202,7 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
-                            <tr>
-                                <td>Laptop</td>
-                                <td>100</td>
-                                <td>Electronic</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -338,5 +228,94 @@
             $('.sidebar').removeClass('active');
         })
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+     document.addEventListener("DOMContentLoaded", async() => {
+        const tableBody = $('#data-table tbody');
+        tableBody.empty();
+      try {
+        const response = await axios.get('/it/showlocation');
+        console.log(response); // Log the response to inspect its structure
+
+        // Handle the successful login response here (e.g., redirect to menu page)
+        if (response.data.message === 'Locations found') {
+            const username = response.data.user.name;
+            const items = response.data.showLocation;
+            const usernameElement = document.getElementById('username');
+        usernameElement.innerText = username;
+          items.forEach(function(item) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${item.locationid}</td>
+              <td>${item.location_name}</td>
+              <td>${item.description}</td>
+              <td>${item.address}</td>            `;
+            tableBody.append(row);
+          });
+          $('#data-table').DataTable();
+        } else {
+          // Show error message to the user
+          console.error(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+        // Handle login error here (e.g., show error message to the user)
+      }
+    });
+    </script>
+    <script>
+        const addLocation = document.getElementById('addLocationButton');
+    
+        addLocation.addEventListener('click', async () => {
+          const Name = document.getElementById('name').value;
+          const Description = document.getElementById('description').value;
+          const Address = document.getElementById('address').value;
+
+          try {
+            const response = await axios.post('/it/addlocation', {Name, Description, Address });
+            console.log(response); // Log the response to inspect its structure
+    
+            // Handle the successful login response here (e.g., redirect to menu page)
+            if (response.data.message === 'Location Created') {
+             window.alert("Location created");
+             window.location.href = '/menulocation.html';
+            } else {
+              // Show error message to the user
+              console.error(response.data.message);
+              window.alert("Fail to create location!");
+            }
+          } catch (error) {
+            console.error(error);
+            // Handle login error here (e.g., show error message to the user)
+          }
+        });
+      </script>
+      <script>
+        const updateLocation = document.getElementById('updateLocation');
+    
+        updateLocation.addEventListener('click', async () => {
+          const LocationID = document.getElementById('updateItemID').value;
+          const Name = document.getElementById('editname').value;
+          const Description = document.getElementById('editdescription').value;
+          const Address = document.getElementById('editaddress').value;
+          try {
+            const response = await axios.put('/it/updatelocation', {LocationID, Name, Description, Address});
+            console.log(response); // Log the response to inspect its structure
+    
+            // Handle the successful login response here (e.g., redirect to menu page)
+            if (response.data.message === 'Location Updated') {
+             window.alert("Location updated");
+             window.location.href = '/menulocation.html';
+            } else {
+              // Show error message to the user
+              console.error(response.data.message);
+              window.alert("Fail to update item!");
+            }
+          } catch (error) {
+            console.error(error);
+            // Handle login error here (e.g., show error message to the user)
+          }
+        });
+      </script>
 </body>
 </html>
