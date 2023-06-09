@@ -7,7 +7,7 @@ const { group } = require('console');
 
 async function login (it){
     const {email, password} = it;
-    const query = `SELECT * FROM users WHERE name = '${email}'`;
+    const query = `SELECT * FROM users WHERE email = '${email}'`;
     const result = await db.query(query);
     if(result.rows.length === 0){
         return {
@@ -217,10 +217,9 @@ async function moveItem(it){
     if(result1.rowCount === 1){
         const query2 = `UPDATE items SET locationid=${LocationID} WHERE itemid=${ItemID}`;
         const result2 = await db.query(query2);
-        console.log(result2.rowCount);
         if(result2.rowCount > 0){
             return {
-                message: 'Item Updated'
+                message: 'Item Moved'
             }
         }else{
             return{
@@ -235,7 +234,10 @@ async function moveItem(it){
 }
 
 async function showMovement(){
-    const query = `SELECT * FROM movement`;
+    const query = `SELECT movementid, items.name as item_name, location.location_name as new_location, users.name as user_name, date, note FROM movement
+                   INNER JOIN users ON movement.userid=users.userid
+                   INNER JOIN items ON movement.itemid=items.itemid
+                   INNER JOIN location ON movement.locationid=location.locationid`;
     const result = await db.query(query);
     if(result.rowCount > 0){
         return{

@@ -59,7 +59,7 @@ async function showItem(req,res){
             res.json(err);
         }
     }else{
-        res.status(401).json({ message: 'User not logged in' });
+        res.status(401).json({ user: req.session.user, message: result.message });
 
     }
     

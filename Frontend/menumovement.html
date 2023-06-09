@@ -11,12 +11,11 @@
 
     <!--DATA TABLE-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-
-    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script defer src="movements.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+        
+        <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!--CSSNYA-->
     <link rel="stylesheet" href="menumovement.css">
@@ -37,7 +36,7 @@
                 <ul class="navbar-nav bg">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="uil uil-user-circle">Username</i>
+                            <i id="username" class="uil uil-user-circle">Username</i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="login.html">Logout</a></li>
@@ -98,7 +97,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="userid" class="form-label">UserID</label>
-                                            <input type="number" class="form-control" id="userid">
+                                            <input type="number" class="form-control" id="userid" aria-describedby="emailHelp" readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="locationid" class="form-label">LocationID</label>
@@ -112,7 +111,7 @@
                                             <label for="note" class="form-label">Note</label>
                                             <input type="text" class="form-control" id="note">
                                         </div>
-                                        <button type="submit" class="btn btn-light mt-3">Move</button>
+                                        <button type="button" id="moveItem" class="btn btn-light mt-3">Move</button>
                                     </form>
                                 </div>
                             </div>
@@ -130,134 +129,17 @@
                     <table class="table" id="data-table" style="background-color: white;">
                         <thead style="background-color:  #CCE6F4; width: 958px;">
                             <tr>
-                                <th>ItemID</th>
-                                <th>UserID</th>
-                                <th>LocationID</th>
+                                <th>MovementID</th>
+                                <th>Item Name</th>
+                                <th>New Location</th>
+                                <th>User Name</th>
                                 <th>Date</th>
                                 <th>Note</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
-                            <tr>
-                                <td>123</td>
-                                <td>2</td>
-                                <td>30</td>
-                                <td>2011-04-25</td>
-                                <td>Jaga Baik baik</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -283,5 +165,78 @@
             $('.sidebar').removeClass('active');
         })
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+     document.addEventListener("DOMContentLoaded", async() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tableBody = $('#data-table tbody');
+        tableBody.empty();
+      try {
+        const response = await axios.get('/it/showmovement');
+        console.log(response); // Log the response to inspect its structure
+
+        // Handle the successful login response here (e.g., redirect to menu page)
+        if (response.data.message === 'Movement Found') {
+            const username = response.data.user.name;
+            const UserID = response.data.user.userid;
+            const items = response.data.showMovement;
+            const usernameElement = document.getElementById('username');
+            const userIdElement = document.getElementById('userid');
+            usernameElement.innerText = username;
+            userIdElement.value = UserID;
+          items.forEach(function(item) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${item.movementid}</td>
+              <td>${item.item_name}</td>
+              <td>${item.new_location}</td>
+              <td>${item.user_name}</td>
+              <td>${new Date(item.date).toLocaleDateString()}</td>
+              <td>${item.note}</td>
+
+            `;
+            tableBody.append(row);
+          });
+          $('#data-table').DataTable();
+        } else {
+          // Show error message to the user
+          console.error(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+        // Handle login error here (e.g., show error message to the user)
+      }
+    });
+    </script>
+    <script>
+        const moveItem = document.getElementById('moveItem');
+    
+        moveItem.addEventListener('click', async () => {
+          const ItemID = document.getElementById('itemid').value;
+          const UserID = document.getElementById('userid').value;
+          const LocationID = document.getElementById('locationID').value;
+          const Note = document.getElementById('note').value;
+
+          try {
+            const response = await axios.post('/it/moveitem', { ItemID, UserID, LocationID, Note });
+            console.log(response); // Log the response to inspect its structure
+    
+            // Handle the successful login response here (e.g., redirect to menu page)
+            if (response.data.message === 'Item Moved') {
+             window.alert("Item Moved");
+             window.location.href = '/menumovement.html';
+            } else {
+              // Show error message to the user
+              console.error(response.data.message);
+              window.alert("Fail to move item!");
+            }
+          } catch (error) {
+            console.error(error);
+            // Handle login error here (e.g., show error message to the user)
+          }
+        });
+      </script>
+      
+    </body>
 </body>
 </html>

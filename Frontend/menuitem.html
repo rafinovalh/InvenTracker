@@ -243,7 +243,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
      document.addEventListener("DOMContentLoaded", async() => {
-        const urlParams = new URLSearchParams(window.location.search);
         const tableBody = $('#data-table tbody');
         tableBody.empty();
       try {
@@ -252,10 +251,7 @@
 
         // Handle the successful login response here (e.g., redirect to menu page)
         if (response.data.message === 'Items found') {
-            const username = response.data.user.name;
             const items = response.data.showItems;
-            const usernameElement = document.getElementById('username');
-        usernameElement.innerText = username;
           items.forEach(function(item) {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -273,6 +269,9 @@
           // Show error message to the user
           console.error(response.data.message);
         }
+        const username = response.data.user.name;
+        const usernameElement = document.getElementById('username');
+        usernameElement.innerText = username;
       } catch (error) {
         console.error(error);
         // Handle login error here (e.g., show error message to the user)
