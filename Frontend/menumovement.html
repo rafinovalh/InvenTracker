@@ -16,6 +16,12 @@
         <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
         <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
     <!--CSSNYA-->
     <link rel="stylesheet" href="menumovement.css">
@@ -119,7 +125,28 @@
                     </div>
                 </div>
 
-
+                <!--Modal Edit-->
+                <button type="button" class="edit-btn btn" data-bs-toggle="modal" data-bs-target="#EditModalForm">
+                    <i class="uil uil-file-export"></i>
+                    Export
+                </button>
+                <div class="modal fade" id="EditModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <div class="myform">
+                                    <!--Modal toggle Item Edit-->
+                                    <button type="button" class="btn btn-light mt-3" data-bs-toggle="modal" data-bs-target="#ItemEditModalForm">Edit</button>
+                                    
+                                    <!--Modal toggle Item Delete-->
+                                    <button type="button" class="btn btn-light mt-3" data-bs-toggle="modal" data-bs-target="#ItemDeleteModalForm">Delete</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
 
             </div>
@@ -197,7 +224,14 @@
             `;
             tableBody.append(row);
           });
-          $('#data-table').DataTable();
+          $('#data-table').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                 'csv', 'excel', 'pdf', 'print'
+            ]
+          });
+          
+
         } else {
           // Show error message to the user
           console.error(response.data.message);
