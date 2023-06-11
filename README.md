@@ -14,7 +14,7 @@ Website Inventaris Barang
 ## Contributors
 Project made by group R18  :
 
-- [Rayhan Akbar Arrisky](https://github.com/rayhan-akbar) - 2106731535
+- [Rayhan Akbar Arrisky](https://github.com/rayhan-akbar) - 2106632655
 - [Rafi' Noval Hady](https://github.com/rafinovalh) - 2106703153
 
 
