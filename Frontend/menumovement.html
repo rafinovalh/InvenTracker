@@ -121,37 +121,14 @@
                                             <label for="note" class="form-label">Note</label>
                                             <input type="text" class="form-control" id="note">
                                         </div>
-                                        <button type="button" id="moveItem" class="btn btn-light mt-3">Move</button>
+                                        <button type="button" id="moveItem" class="btn btn-light mt-3" data-bs-toggle="modal">Move</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!--Modal Edit-->
-                <button type="button" class="edit-btn btn" data-bs-toggle="modal" data-bs-target="#EditModalForm">
-                    <i class="uil uil-file-export"></i>
-                    Export
-                </button>
-                <div class="modal fade" id="EditModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                <div class="myform">
-                                    <!--Modal toggle Item Edit-->
-                                    <button type="button" class="btn btn-light mt-3" data-bs-toggle="modal" data-bs-target="#ItemEditModalForm">Edit</button>
-                                    
-                                    <!--Modal toggle Item Delete-->
-                                    <button type="button" class="btn btn-light mt-3" data-bs-toggle="modal" data-bs-target="#ItemDeleteModalForm">Delete</button>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                <div id="liveAlertPlaceholder"></div>
 
             </div>
 
@@ -255,18 +232,30 @@
           const LocationID = document.getElementById('locationID').value;
           const Note = document.getElementById('note').value;
 
+          const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+          const alert = (message, type) => {
+          const wrapper = document.createElement('div')
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" onclick="reloadPage()" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+          ].join('')
+
+          alertPlaceholder.append(wrapper)
+          }
+          
           try {
             const response = await axios.post('/it/moveitem', { ItemID, UserID, LocationID, Note });
             console.log(response); // Log the response to inspect its structure
     
             // Handle the successful login response here (e.g., redirect to menu page)
             if (response.data.message === 'Item Moved') {
-             window.alert("Item Moved");
-             window.location.href = '/menumovement.html';
+                alert('Move Success', 'success')
             } else {
               // Show error message to the user
+              alert('Move Failed', 'danger')
               console.error(response.data.message);
-              window.alert("Fail to move item!");
             }
           } catch (error) {
             console.error(error);
@@ -275,6 +264,12 @@
         });
       </script>
       
+
+      <script>
+        function reloadPage() {
+            location.reload();
+        }
+        </script>
     </body>
 </body>
 </html>
