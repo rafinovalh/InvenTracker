@@ -115,13 +115,15 @@
                                                 <label for="location" class="form-label">Location</label>
                                                 <input type="text" class="form-control" id="location">
                                             </div>
-                                            <button type="button" id="addItemButton" class="btn btn-light mt-3">Add</button>
+                                            <button type="button" id="addItemButton" class="btn btn-light mt-3" data-bs-toggle="modal">Add</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div id="liveAlertPlaceholder"></div>
+                    
 
 
                     <!--Modal Edit-->
@@ -158,7 +160,7 @@
                                                 <label for="deleteItemID" class="form-label">ItemID</label>
                                                 <input type="number" class="form-control" id="deleteItemID" >
                                             </div>
-                                            <button type="button" id="deleteItem" class="btn btn-light mt-3">Delete</button>
+                                            <button type="button" id="deleteItem" class="btn btn-light mt-3" data-bs-toggle="modal">Delete</button>
                                         </form>
                                     </div>
                                 </div>
@@ -189,7 +191,7 @@
                                                 <label for="deletecategory" class="form-label">Category</label>
                                                 <input type="text" class="form-control" id="editcategory" aria-describedby="emailHelp">
                                             </div>
-                                            <button type="button" id="updateItem" class="btn btn-light mt-3">Submit</button>
+                                            <button type="button" id="updateItem" class="btn btn-light mt-3" data-bs-toggle="modal">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -287,18 +289,30 @@
           const Category = document.getElementById('category').value;
           const LocationID = document.getElementById('location').value;
 
+          const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+          const alert = (message, type) => {
+          const wrapper = document.createElement('div')
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" onclick="reloadPage()" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+          ].join('')
+
+          alertPlaceholder.append(wrapper)
+          }
+
           try {
             const response = await axios.post('/it/additem', { Name, Quantity, Category, LocationID });
             console.log(response); // Log the response to inspect its structure
     
             // Handle the successful login response here (e.g., redirect to menu page)
             if (response.data.message === 'Item Created') {
-             window.alert("Item created");
-             window.location.href = '/menuitem.html';
+             alert('Adding Success', 'success')
             } else {
               // Show error message to the user
+              alert('Adding Failed', 'danger')
               console.error(response.data.message);
-              window.alert("Fail to create item!");
             }
           } catch (error) {
             console.error(error);
@@ -306,24 +320,45 @@
           }
         });
       </script>
+
+
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+    </script>
+
+
       <script>
         const deleteItem = document.getElementById('deleteItem');
     
         deleteItem.addEventListener('click', async () => {
           const ItemID = document.getElementById('deleteItemID').value;
 
+          const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+          const alert = (message, type) => {
+          const wrapper = document.createElement('div')
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" onclick="reloadPage()" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+          ].join('')
+
+          alertPlaceholder.append(wrapper)
+          }
+
           try {
-            const response = await axios.delete('/it/deleteitem', {ItemID});
+            const response = await axios.delete('/it/deleteitem', {data: {ItemID}});
             console.log(response); // Log the response to inspect its structure
     
             // Handle the successful login response here (e.g., redirect to menu page)
             if (response.data.message === 'Item deleted') {
-             window.alert("Item deleted");
-             window.location.href = '/menuitem.html';
+                alert('Delete Success', 'success')
             } else {
               // Show error message to the user
+              alert('Delete Failed', 'danger')
               console.error(response.data.message);
-              window.alert("Fail to delete item!");
             }
           } catch (error) {
             console.error(error);
@@ -339,18 +374,30 @@
           const Name = document.getElementById('editname').value;
           const Quantity = document.getElementById('editquantity').value;
           const Category = document.getElementById('editcategory').value;
+
+          const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+          const alert = (message, type) => {
+          const wrapper = document.createElement('div')
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" onclick="reloadPage()" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+          ].join('')
+
+          alertPlaceholder.append(wrapper)
+          }
           try {
             const response = await axios.put('/it/updateitem', {ItemID, Name, Quantity, Category});
             console.log(response); // Log the response to inspect its structure
     
             // Handle the successful login response here (e.g., redirect to menu page)
             if (response.data.message === 'Item Updated') {
-             window.alert("Item updated");
-             window.location.href = '/menuitem.html';
+                alert('Update Success', 'success')
             } else {
               // Show error message to the user
+              alert('Update Failed', 'danger')
               console.error(response.data.message);
-              window.alert("Fail to update item!");
             }
           } catch (error) {
             console.error(error);
@@ -358,5 +405,6 @@
           }
         });
       </script>
+        
     </body>
 </html>
